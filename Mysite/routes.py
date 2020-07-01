@@ -1,10 +1,20 @@
+from flask import render_template
 from Mysite import app
-from markupsafe import escape
+
 
 @app.route('/')
+@app.route('/index')
 def index():
-    return '<h1>Добро пожаловать на мой сайт!</h1><p>ты хто?</p><ul><li><a href="/hello/Маша">Маша</a></li><li><a href="/hello/Cаша">Cаша</a></li></ul>'
+  return render_template('index.html', title='Главная')
 
-@app.route('/hello/<name>')
-def hello(name):
-    return '<h1>Привет, %s!</h1>' % escape(name)
+
+@app.route('/contacts')
+def contacts():
+  return render_template('contacts.html', title='Контакты')
+
+
+@app.route('/about')
+def about_us():
+  return render_template('about.html', title='О нас')
+
+
