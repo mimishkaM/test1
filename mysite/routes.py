@@ -1,5 +1,5 @@
-from flask import render_template, flh, redirect
-from mysite import appas
+from flask import render_template, flash, redirect
+from mysite import app
 from mysite.forms import LoginForm
 
 
