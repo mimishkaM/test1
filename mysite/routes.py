@@ -23,7 +23,7 @@ def about_us():
 def login():
   form = LoginForm()
   if form.validate_on_submit():
-    flash(f'Пользователь {form.username.data}, поле "запомнить: {form.remember_me.data}', 'info')
+    flash(f'Пользователь {form.username.data}, поле "запомнить": {form.remember_me.data}', 'info')
     return redirect('/index')
   return render_template('login.html', title='Вход', form=form)
 
