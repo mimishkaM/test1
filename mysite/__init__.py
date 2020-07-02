@@ -5,4 +5,4 @@ app  = Flask(__name__)
 app.config.from_object(Config)
 
 
-from Mysite import routes
+from mysite import routes
