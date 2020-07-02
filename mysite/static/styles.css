@@ -1,0 +1,68 @@
+form {
+    width: 35%;
+    min-width: 400px;
+    margin: 1em auto;
+    border: 0.15em solid dimgray;
+    padding: 1.5em;
+    border-radius: 0.35em;
+}
+
+label {
+    width: 30%;
+    display: inline-block;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 60%;
+    border: 0.1em solid rgba(0, 0, 0, 0.2);
+    outline: none !important;
+    padding: 1em;
+    border-radius: 0.35em;
+    transition: border .2s ease-in-out;
+    margin-top: 0.5rem
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover {
+    border: 0.1em solid rgba(0, 0, 0, 0.6);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border: 0.1em solid rgba(0, 0, 0, 0.7);
+}
+
+input[type="submit"] {
+    width: 60%;
+    margin-top: 0.5rem;
+    outline: none !important;
+    border: 0.1em solid rgba(0, 0, 0, 0.2);
+    background: none;
+    padding: 1em;
+    border-radius: 0.35em;
+    margin-left: 30%;
+    transition: all .3s ease-in-out;
+}
+
+input[type="submit"]:hover {
+    background: rgba(63, 84, 191, 1);
+    border-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    color: #FFF;
+}
+
+input[type="checkbox"] {
+    margin-top: 0.5rem;
+}
+
+
+h1 {
+    text-align: center;
+}
+
+input[type="number"],
+input[type="radio"] {
+    width: 20%;
+    margin-bottom: 0.5em;
+}

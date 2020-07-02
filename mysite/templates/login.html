@@ -1,33 +1,37 @@
 {% extends 'base.html' %}
+
 {% set active_page = "login" %}
+
 {% block content %}
 
-    <form method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <div class="form-group">
-            {{ form.username.label }}
-            {{ form.username(class="form-control") }}
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <form action="https://echo.htmlacademy.ru/courses" method="get">
 
-            {% for error in form.username.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
-            {% endfor %}
+        <label for="log">Ваш логин:</label>
+        <input type="text" name="login" id="log" placeholder="Имя пользователя">
 
+        <label for="pass">Пароль:</label>
+        <input type="password" name="password" id="pass" placeholder="Пароль">
+
+        <p>Выберите Ваш пол:</p>
+
+        <div>
+            <input type="radio" name="radio" value="m">
+            <label class="small" for="M">Мужской</label>
         </div>
-        <div class="form-group">
-            {{ form.password.label }}
-            {{ form.password(class="form-control") }}
-
-            {% for error in form.password.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
-            {% endfor %}
-
+        <div>
+            <input type="radio" id="male" name="radio" value="w">
+            <label class="small" for="W">Женский</label>
         </div>
-        <div class="form-group form-check">
-            {{ form.remember_me(class="form-check-input") }} {{ form.remember_me.label(class="form-check-label") }}
-        </div>
+        <label for="tentacles">Укажите Ваш возраст:</label>
+        <input type="number" id="tentacles" name="tentacles" min="0" max="300">
 
-        {{ form.submit(class="btn btn-primary") }}
+        <div></div>
+
+        <label for="scales">Запомнить меня</label>
+        <input type="checkbox" id="scales" name="scales" checked>
+
+        <input type="submit" value="Войти">
+
     </form>
 
 {% endblock %}
