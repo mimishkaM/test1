@@ -25,7 +25,7 @@ input[type="password"] {
 
 input[type="text"]:hover,
 input[type="password"]:hover {
-    border: 0.1em solid rgba(0, 0, 0, 0.6);
+    border: 0.1em solid rgba(0, 0, 0, 0.5);
 }
 
 input[type="text"]:focus,
@@ -65,4 +65,7 @@ input[type="number"],
 input[type="radio"] {
     width: 20%;
     margin-bottom: 0.5em;
+}
+.navbar-collapse{
+    justify-content: space-between;
 }

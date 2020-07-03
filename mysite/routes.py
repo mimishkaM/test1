@@ -10,9 +10,9 @@ def index():
   return render_template('index.html', title='Главная')
 
 
-@app.route('/contacts')
-def contacts():
-  return render_template('contacts.html', title='Контакты')
+@app.route('/documentation')
+def documentation():
+  return render_template('documentation.html', title='Документация')
 
 @app.route('/about')
 def about_us():
@@ -26,5 +26,18 @@ def login():
     flash(f'Пользователь {form.username.data}, поле "запомнить": {form.remember_me.data}', 'info')
     return redirect('/index')
   return render_template('login.html', title='Вход', form=form)
+
+@app.route('/help')
+def help():
+  return render_template('help.html', title='Помощь')
+
+@app.route('/achievements')
+def achievements():
+  return render_template('achievements.html', title='Наши достижения')
+
+@app.route('/blog')
+def blog():
+  return render_template('blog.html', title='Блог')
+
 
 
