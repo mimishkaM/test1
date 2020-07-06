@@ -2,7 +2,9 @@
 {% set active_page = "index" %}
 
 {% block content %}
-
-    <h1>Добро пожаловать на мой сайт!</h1>
-
+    {% if current_user.is_anonymous %}
+        <h1>Добро пожаловать на мой сайт!</h1>
+    {% else %}
+        <h1>Привет, {{ current_user.username.capitalize() }}! Добро пожаловать на мой сайт!</h1>
+    {% endif %}
 {% endblock %}
