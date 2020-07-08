@@ -3,6 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
 from mysite.models import User
 from flask_login import current_user
+from flask_wtf.file import FileField, FileAllowed
 
 
 class LoginForm(FlaskForm):
@@ -11,13 +12,13 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Запомнить меня')
     submit = SubmitField('Войти')
 
+
 class RegistrationForm(FlaskForm):
     username = StringField('Имя пользователя', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
 
     password = PasswordField('Пароль', validators=[DataRequired()])
     password2 = PasswordField('Пароль(еще раз)', validators=[DataRequired(), EqualTo('password')])
-
 
     submit = SubmitField('Зарегистрироваться')
 
@@ -35,6 +36,7 @@ class RegistrationForm(FlaskForm):
 class AccountUpdateForm(FlaskForm):
     username = StringField('Имя пользователя', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
+    picture = FileField(validators=[FileAllowed(['jpg', 'png'])])
 
     submit = SubmitField('Обновить')
 
@@ -44,6 +46,7 @@ class AccountUpdateForm(FlaskForm):
             user = User.query.filter_by(username=username.data).first()
             if user is not None:
                 raise ValidationError('Используйте другое имя пользователя!')
+
 
     def validate_email(self, email):
         if email.data != current_user.email:
