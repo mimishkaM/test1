@@ -1,17 +1,26 @@
 from flask import render_template, flash, redirect, url_for, request
 from mysite import app, db
-from mysite.forms import LoginForm, RegistrationForm, AccountUpdateForm
+from mysite.forms import LoginForm, RegistrationForm, AccountUpdateForm, FeedbackForm
 from flask_login import current_user, login_user, logout_user, login_required
-from mysite.models import User
+from mysite.models import User, Zvonok
 import secrets
 import os
 from PIL import Image
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html', title='Главная')
+    form = FeedbackForm()
+    if form.validate_on_submit():
+        zvonok = Zvonok(body=form.ody.data, phone=form.phone.data, user_username=current_user.username)
+        db.session.add(zvonok)
+        db.session.commit()
+
+        flash('Обращение отправлена', 'success')
+        return redirect('index')
+
+    return render_template('index.html', title='Главная', form=form)
 
 
 @app.route('/contacts')
@@ -32,7 +41,7 @@ def login():
         return redirect(url_for('index'))
 
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = User.query.filter_by(username=form.username.data.lower, email=form.email.data.lower).first()
 
         if user is None or not user.check_password(form.password.data):
             flash('Неправильное имя пользователя и/или пароль', 'danger')
