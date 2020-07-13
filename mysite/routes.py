@@ -13,7 +13,7 @@ from PIL import Image
 def index():
     form = FeedbackForm()
     if form.validate_on_submit():
-        zvonok = Zvonok(body=form.ody.data, phone=form.phone.data, user_username=current_user.username)
+        zvonok = Zvonok(body=form.body.data, phone=form.phone.data, user_username=current_user.username)
         db.session.add(zvonok)
         db.session.commit()
 
@@ -41,7 +41,7 @@ def login():
         return redirect(url_for('index'))
 
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data.lower, email=form.email.data.lower).first()
+        user = User.query.filter_by(username=form.username.data.lower()).first()
 
         if user is None or not user.check_password(form.password.data):
             flash('Неправильное имя пользователя и/или пароль', 'danger')
@@ -87,7 +87,7 @@ def save_picture(form_picture):
     resize = (125,125)
     image = Image.open(form_picture)
     image.thumbnail(resize)
-    image.save(form_picture)
+    image.save(picture_path)
 
     return p_filename
 
@@ -99,6 +99,8 @@ def save_picture(form_picture):
 def account():
     form = AccountUpdateForm()
     avatar = url_for('static', filename='img/avatar/' + current_user.avatar)
+
+    feedback = Zvonok.query.all()
 
     if form.validate_on_submit():
         if form.picture.data:
@@ -113,4 +115,4 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
 
-    return render_template('account.html', title='Личный кабинет', avatar=avatar, form=form)
+    return render_template('account.html', title='Личный кабинет', avatar=avatar, form=form, feedback=feedback)
