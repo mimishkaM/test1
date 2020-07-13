@@ -71,6 +71,7 @@ def register():
         db.session.commit()
 
         flash('Вы успешно зарегестрировались!', 'success')
+        login_user(user)
         return redirect(url_for('index'))
 
 
